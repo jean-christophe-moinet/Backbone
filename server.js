@@ -39,8 +39,18 @@ app.configure( function() {
 	app.use( express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
+var dbOptions = {
+	  user: 'admin',
+	  pass: 'C-ELke-4vaJv'
+	}
+
 // Connect to database
-mongoose.connect( self.dburl );
+if (process.env.OPENSHIFT_MONGODB_DB_HOST)
+{
+	mongoose.connect( self.dburl, dbOptions );
+} else {
+	mongoose.connect( self.dburl );
+}
 
 // Schemas
 var Keywords = new mongoose.Schema({
