@@ -25,6 +25,11 @@ app.configure( function() {
     app.use( express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
+//Routes
+app.get( '/api', function( request, response ) {
+    response.send( 'Library API is running' );
+});
+
 //Start server
 var port = 4711;
 app.listen( port, function() {
